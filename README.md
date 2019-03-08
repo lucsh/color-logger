@@ -5,7 +5,7 @@
 colorful logger for node.
 
 ```
-npm install color-logger
+npm install --save lucsh/color-logger
 ```
 
 ## Example
@@ -25,12 +25,9 @@ Logger.d('debug log');
 Logger.i('info log');
 Logger.w('warning log');
 Logger.e('error log');
+Logger.n('normal log');
+Logger.t('with timestamp (same line)');
 ```
-
-<img src='./misc/color-logger.png' width='600'>
-
-## API Reference
-[https://h13i32maru.github.io/color-logger/](https://h13i32maru.github.io/color-logger/)
 
 ## License
 MIT

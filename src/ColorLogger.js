@@ -1,52 +1,20 @@
-// ASCII ESCAPE SEQUENCE http://www5c.biglobe.ne.jp/~ecb/assembler2/b_2.html
+import 'node-json-color-stringify';
+
 const levelToColor = {
-  n: '[N]', // no color
-  v: '[35m[V]', // purple
-  d: '[34m[D]', // blue
-  i: '[32m[I]', // green
-  w: '[33m[W]', // yellow
-  e: '[31m[E]'  // red
+  n: '', // no color
+  t: ' \x1b[46m', // green
+  v: ' \x1b[45m[VERBOSE]\x1b[0m', // magenta
+  d: ' \x1b[44m[DEBUG]\x1b[0m', // blue
+  i: ' \x1b[46m[INFO]\x1b[0m', // water
+  w: ' \x1b[43m[WARN]\x1b[0m', // yellow
+  e: ' \x1b[41m[ERROR]\x1b[0m', // red
 };
 
-/**
- * display colorful log. now, not support browser.
- *
- * format:
- * ``[LogLevel] [Time] [File] log text``
- *
- * format with tag:
- * ``[LogLevel] [Time] [File] [Tag] log text``
- *
- * log level and color:
- * - verbose: purple
- * - debug: blue
- * - info: green
- * - warning: yellow
- * - error: red
- *
- * @example
- * import Logger from 'color-logger'
- *
- * // simple usage
- * Logger.v('verbose log');
- *
- * // tag usage
- * let logger = new Logger('MyTag');
- * logger.d('debug log');
- */
 export class ColorLogger {
-  /**
-   * create instance.
-   */
   constructor() {
     this._allLogs = [];
   }
 
-  /**
-   * log information.
-   * @return {string} - file name and line number.
-   * @private
-   */
   _getInfo() {
     let info;
     try {
@@ -79,8 +47,8 @@ export class ColorLogger {
   /**
    * if false, not display log. default is true.
    */
-  set debug(v) {
-    this._debug = v;
+  set debug(b) {
+    this._debug = b;
   }
 
   /**
@@ -94,7 +62,7 @@ export class ColorLogger {
     const text = [];
     for (const m of msg) {
       if (typeof m === 'object') {
-        text.push(JSON.stringify(m, null, 2));
+        text.push(JSON.colorStringify(m, null, 2));
       } else {
         text.push(m);
       }
@@ -104,26 +72,28 @@ export class ColorLogger {
     const info = this._getInfo();
 
     const d = new Date();
-    let month = d.getMonth() + 1;
-    if (month < 10) month = `0${month}`;
-    let date = d.getDate();
-    if (date < 10) date = `0${date}`;
+
     let hour = d.getHours();
     if (hour < 10) hour = `0${hour}`;
     let minutes = d.getMinutes();
     if (minutes < 10) minutes = `0${minutes}`;
     let sec = d.getSeconds();
     if (sec < 10) sec = `0${sec}`;
-    const now = `${d.getFullYear()}-${month}-${date}T${hour}:${minutes}:${sec}.${d.getMilliseconds()}Z`;
-
-    const log = `${color} [${now}] [${info}] ${text.join(' ')}[0m`;
-    const offColorLog = `[${level.toUpperCase()}] [${now}] [${info}] ${text.join(' ')}`;
+    const now = `${hour}:${minutes}:${sec}.${d.getMilliseconds()}`;
+    const information = `\x1b[2m[${now}] [${info}][0m`;
+    const log = `${color} ${text.join(' ')}[0m`;
+    const offColorLog = `[${level.toUpperCase()}] [${now}] ${text.join(' ')} [${info}] `;
 
     this._allLogs.push(offColorLog);
     if (this._allLogs.length > 10000) this._allLogs.shift();
 
-    if (this._debug) console.log(log);
-
+    const ts = level === 't' ? `\x1b[2m[${now}][0m` : '';
+    if (this._debug) {
+      if (!(level === 't' || level === 'n')) {
+        console.log(information);
+      }
+      console.log(ts, log);
+    }
     return log;
   }
 
@@ -179,6 +149,15 @@ export class ColorLogger {
    */
   e(...msg) {
     return this._output('e', ...msg);
+  }
+
+  /**
+   * display timestamp(blue) log.
+   * @param {...*} msg - log message.
+   * @returns {string} formatted log message.
+   */
+  t(...msg) {
+    return this._output('t', ...msg);
   }
 }
 
