@@ -11,7 +11,7 @@
   "scripts": {
     "build": "bash ./script/build.sh",
     "test": "bash ./script/test.sh",
-    "test-es5": "bash ./script/test-es5.sh",
+    "test-es5": "bash ./script/test-es5.sh"
   },
   "dependencies": {
     "node-json-color-stringify": "^1.1.0"
