@@ -16,6 +16,9 @@ import Logger from 'color-logger';
 // simple usage
 Logger.v('verbose log1', 'verbose log2');
 
+// to disable 
+Logger.debug = false;
+
 // use object
 Logger.d({foo: 123, bar: [1, 2, 3]});
 
@@ -28,6 +31,6 @@ Logger.e('error log');
 Logger.n('normal log');
 Logger.t('with timestamp (same line)');
 ```
-
+<img src='./misc/color-logger.png' width='600'>
 ## License
 MIT
