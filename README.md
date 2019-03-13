@@ -1,6 +1,3 @@
-[![Build Status](https://travis-ci.org/h13i32maru/color-logger.svg?branch=master)](https://travis-ci.org/h13i32maru/color-logger)
-[![Coverage Status](https://coveralls.io/repos/h13i32maru/color-logger/badge.svg)](https://coveralls.io/r/h13i32maru/color-logger)
-
 # Color Logger
 colorful logger for node.
 
