@@ -8,7 +8,7 @@ npm install --save lucsh/color-logger
 ## Example
 
 ```js
-import Logger from 'color-logger';
+import Logger from 'colorful-logger-node';
 
 // simple usage
 Logger.v('verbose log1', 'verbose log2');

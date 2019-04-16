@@ -2,12 +2,12 @@ import 'node-json-color-stringify';
 
 const levelToColor = {
   n: '', // no color
-  t: ' \x1b[46m', // green
+  t: ' \x1b[30;46;5;82m', // cyan BG black FG
   v: ' \x1b[45m[VERBOSE]\x1b[0m', // magenta
   d: ' \x1b[44m[DEBUG]\x1b[0m', // blue
   i: ' \x1b[46m[INFO]\x1b[0m', // water
   w: ' \x1b[43m[WARN]\x1b[0m', // yellow
-  e: ' \x1b[41m[ERROR]\x1b[0m', // red
+  e: ' \x1b[41m[ERROR]\x1b[0m' // red
 };
 
 export class ColorLogger {

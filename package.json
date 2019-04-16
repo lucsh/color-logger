@@ -1,6 +1,6 @@
 {
-  "name": "color-logger",
-  "version": "0.0.7",
+  "name": "colorful-logger-node",
+  "version": "0.1.2",
   "description": "Color Logger",
   "author": "h13i32maru & lucsh",
   "license": "MIT",

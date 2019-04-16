@@ -9,7 +9,7 @@ require('node-json-color-stringify');
 
 const levelToColor = {
   n: '', // no color
-  t: ' \x1b[46m', // green
+  t: ' \x1b[30;46;5;82m', // cyan BG black FG
   v: ' \x1b[45m[VERBOSE]\x1b[0m', // magenta
   d: ' \x1b[44m[DEBUG]\x1b[0m', // blue
   i: ' \x1b[46m[INFO]\x1b[0m', // water
