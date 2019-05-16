@@ -3,10 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ColorLogger = undefined;
-
-require('node-json-color-stringify');
-
 const levelToColor = {
   n: '', // no color
   t: ' \x1b[30;46;5;82m', // cyan BG black FG
@@ -74,7 +70,7 @@ class ColorLogger {
 
     for (const m of msg) {
       if (typeof m === 'object') {
-        text.push(JSON.colorStringify(m, null, 2));
+        text.push(JSON.stringify(m, null, 2));
       } else {
         text.push(m);
       }
